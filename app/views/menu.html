@@ -14,76 +14,22 @@
       <span>Kolacja</span>
     </div>
   </div>
-  <div class="cell-14">
+  
+  <div class="cell-14" ng-repeat="(day, menuCategory) in menu.orders">
     <div class="inner">
-      <span>Poniedziałek</span>
+      <span>{{day}}</span>
     </div>
     <div class="inner cell-order">
-
+      <span>{{menuCategory.snia}}</span>
     </div>
     <div class="inner cell-order">
-
+      <span>{{menuCategory.obiad}}</span>
     </div>
     <div class="inner cell-order">
-
+      <span>{{menuCategory.kola}}</span>
     </div>
   </div>
-  <div class="cell-14">
-    <div class="inner">
-      <span>Wtorek</span>
-    </div>
-    <div class="inner cell-order">
 
-    </div>
-    <div class="inner cell-order">
-
-    </div>
-    <div class="inner cell-order">
-
-    </div>
-  </div>
-  <div class="cell-14">
-    <div class="inner">
-      <span>Środa</span>
-    </div>
-    <div class="inner cell-order">
-
-    </div>
-    <div class="inner cell-order">
-
-    </div>
-    <div class="inner cell-order">
-
-    </div>
-  </div>
-  <div class="cell-14">
-    <div class="inner">
-      <span>Czwartek</span>
-    </div>
-    <div class="inner cell-order">
-
-    </div>
-    <div class="inner cell-order">
-
-    </div>
-    <div class="inner cell-order">
-
-    </div>
-  </div>
-  <div class="cell-14">
-    <div class="inner">
-      <span>Piątek</span>
-    </div>
-    <div class="inner cell-order">
-
-    </div>
-    <div class="inner cell-order">
-
-    </div>
-    <div class="inner cell-order">
-
-    </div>
-  </div>
   <div class="cell-14">
     <div class="inner">
 
@@ -94,15 +40,15 @@
     <div class="inner cell-button">
       <span>Zamawiam</span>
     </div>
-    <div class="inner cell-button">
+    <div class="inner cell-button" ng-click="menu.dayClick()">
       <span>Filtry</span>
     </div>
   </div>
 
 </header>
 <main>
-  <div food application-name="Tomek's app right here"></div>
-  <my-food ng-click="menu.showCurtain(this)" ng-repeat="item in menu.items" source="{{item.source}}" food-name="{{item.name}}"></my-food>
+
+  <my-food ng-repeat="item in menu.items" source="{{item.source}}" food-name="{{item.name}}" day-click="menu.clicked(dzien, jedzenie)" meal-click="menu.clickedMeal(pora)"></my-food>
 
 </main>
 <footer>

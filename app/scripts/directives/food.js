@@ -7,29 +7,6 @@
  * # food
  */
 angular.module('healthydiet2App')
-  // .directive('food', function ($log) {
-  //   function linkFunction(scope, elem, attrs){
-  //     elem.on('mouseover', function() {
-  //       $log.log(elem.children());
-  //     })
-  //   }
-  //   return {
-  //     scope: {
-  //       appName: '@applicationName'
-  //     },
-  //     template: '<div>Hey! Its me yours directvie! {{appName}} </div>',
-  //     link: linkFunction
-  //   };
-  // })
-  .directive('mySvg', function(){
-    return {
-      scope: {
-        color: '=',
-        kiwiClick: '&'
-      },
-      templateUrl: 'images/kiwi.svg'
-    }
-  })
   .directive('myFood', function($log){
     function linkFunction(scope, elem, attrs){
       elem.on('mouseenter', function() {
@@ -38,13 +15,36 @@ angular.module('healthydiet2App')
 
       elem.on('mouseleave', function() {
         elem.children().children()[0].classList.remove('animate');
+        elem.children().children()[1].classList.remove('animate');
+        elem.children().children()[2].classList.remove('animate');
+        elem.children().children()[0].classList.remove('animate-down');
+        elem.children().children()[1].classList.remove('animate-down');
+        elem.children().children()[2].classList.remove('animate-down');
       });
+
+      elem.on('click', function() {
+        elem.children().children()[0].className += ' animate-down';
+        elem.children().children()[1].className += ' animate';
+        // $log.log($('.cell-food'));
+      });
+
+      angular.element(elem.children().children()[1]).on('click', function(){
+        elem.children().children()[1].className += ' animate-down';
+        elem.children().children()[2].className += ' animate';
+      })
+
+      angular.element(elem.children().children()[2]).on('click', function(){
+        elem.children().children()[2].className += ' animate-down';
+      })
+
     };
 
     return {
       scope: {
         source: '@',
-        foodName: '@'
+        foodName: '@',
+        dayClick: '&',
+        mealClick: '&'
       },
       templateUrl: 'scripts/directives/food.html',
       link: linkFunction
