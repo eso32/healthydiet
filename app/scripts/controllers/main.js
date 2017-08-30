@@ -9,5 +9,5 @@
  */
 angular.module('healthydiet2App')
   .controller('MainCtrl', function () {
-    document.getElementById('login-panel-id').className += " animate";
+    document.getElementById('login-panel-id').className += ' animate';
   });

@@ -16,8 +16,8 @@ angular.module('healthydiet2App')
      'Content-Type': 'application/json'
     }
     }).then(function successCallback(response) {
-        return response.data
+        return response.data;
       }, function errorCallback(response) {
-        console.log('Error occured '+response.status)
+        console.log('Error occured '+response.status);
       });
   });

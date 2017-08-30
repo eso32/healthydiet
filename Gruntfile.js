@@ -174,7 +174,7 @@ module.exports = function (grunt) {
     postcss: {
       options: {
         processors: [
-          require('autoprefixer-core')({browsers: ['last 1 version']})
+          require('autoprefixer-core')({browsers: ['last 100 version']})
         ]
       },
       server: {
@@ -291,6 +291,7 @@ module.exports = function (grunt) {
       html: ['<%= yeoman.dist %>/{,*/}*.html'],
       css: ['<%= yeoman.dist %>/styles/{,*/}*.css'],
       js: ['<%= yeoman.dist %>/scripts/{,*/}*.js'],
+      json: ['<%= yeoman.dist %>/{,*/}*.json'],
       options: {
         assetsDirs: [
           '<%= yeoman.dist %>',
@@ -412,11 +413,14 @@ module.exports = function (grunt) {
           src: [
             '*.{ico,png,txt}',
             '*.html',
+            '*.json',
             'images/{,*/}*.{webp}',
             'styles/fonts/{,*/}*.*'
           ]
         }, {
           expand: true,
+          dot: true,
+          cwd: 'bower_components/bootstrap/dist',
           cwd: '.tmp/images',
           dest: '<%= yeoman.dist %>/images',
           src: ['generated/*']

@@ -1,6 +1,9 @@
 $main-cl: rgba(28, 49, 58, 0.95);
 $second-cl: #718792;
 $darker-sec-cl: #3a4951;
+@mixin main-bg($opacity) {
+          background: rgba(28, 49, 58, $opacity);
+}
 
 @import url('https://fonts.googleapis.com/css?family=Encode+Sans|Josefin+Sans|Open+Sans|Quicksand|Raleway');
 
@@ -36,7 +39,7 @@ body, html{
   }
   .login-panel{
     width: 400px;
-    height: 500px;
+    height: 580px;
     background-color: rgba(28, 49, 58, 0.95);
     border-radius: 3px;
     position: absolute;
@@ -45,8 +48,8 @@ body, html{
     transform: translate(-50%, 0%);
     text-align: center;
     img{
-      margin-top: 20px;
-      margin-bottom: 60px;
+      margin-top: 10px;
+      margin-bottom: 10px;
       width: 80%;
       height: auto;
     }
@@ -105,6 +108,7 @@ body, html{
     width: 100%;
     height: 250px;
     font-size: 12px;
+    position: relative;
     div.cell-14{
       margin: 0;
       float: left;
@@ -139,16 +143,102 @@ body, html{
         box-sizing: border-box;
         border: 1px solid $main-cl;
         background: $main-cl;
-        background: linear-gradient(to right, $main-cl,$darker-sec-cl,$main-cl);
+//        background: linear-gradient(to right, $main-cl,$darker-sec-cl,$main-cl);
         transition: background 1s linear;
         cursor: pointer;
         font-weight: 900;
         span{
           cursor: pointer;
+          i{
+            font-size: 30px;
+            transition: margin 0.1s linear;
+            &:hover{
+              margin-top: -10px;
+            }
+          }
         }
         &:hover{
-          background: linear-gradient(to right, $main-cl,$second-cl,$main-cl);
+//          background: linear-gradient(to right, $main-cl,$second-cl,$main-cl);
+          background: $darker-sec-cl;
         }
+      }
+    }
+    div.cell-full{
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      top: -100%;
+      left: 0px;
+      background: rgba(0,0,0,0.8);
+      i.fa.fa-times{
+        position: absolute;
+        font-size: 40px;
+        cursor: pointer;
+        top: 15px;
+        right: 25px;
+      }
+      div.search{
+        padding-top: 40px;
+        padding-left: 40px;
+        padding-right: 40px;
+        max-width: 100%;
+        overflow: hidden;
+        color: $second-cl;
+        text-align: center;
+        i{
+          padding-top: 5px;
+          padding-left: 10px;
+          font-size: 40px;
+          float: left;
+          @include main-bg(0.95);
+          height: 47px;
+          width: 40px;
+          user-select: none;
+        }
+        input{
+          color: $second-cl;
+          float: left;
+          width: calc(100% - 80px - 60px);
+          height: 50px;
+          border: none;
+          @include main-bg(0.95);
+          font-size: 30px;
+          font-style: italic;
+          font-family: 'Quicksand', sans-serif;
+          padding-left: 10px;
+          outline: none;
+        }
+      }
+      div.tags, div.diet{
+        display: inline-block;
+        width: auto;
+        color: white;
+        text-align: left;
+        margin-top: 10px;
+        padding: 10px 40px;
+        border-right: 1px solid $darker-sec-cl;
+        h1{
+          margin: 0px;
+          margin-bottom: 20px;
+        }
+        span{
+          user-select: none;
+          padding: 5px;
+          border-radius: 3px;
+          border: 2px solid $second-cl;
+          cursor: pointer;
+          &:hover{
+            background: $darker-sec-cl;
+          }
+        }
+      }
+      &.animateIn{
+        animation: slide-in 0.5s cubic-bezier(.64,.34,.53,1.21);
+        animation-fill-mode: forwards;
+      }
+      &.animateOut{
+        animation: slide-out 0.3s cubic-bezier(.64,.34,.53,1.21);
+        animation-fill-mode: forwards;
       }
     }
   }
@@ -199,6 +289,7 @@ body, html{
           background-repeat: no-repeat;
           font-size: 40px;
           cursor: pointer;
+          user-select: none;
         }
         &.animate{
           animation: slide-in 0.3s cubic-bezier(.64,.34,.53,1.21);
@@ -296,8 +387,51 @@ body, html{
 
 
 /* Responsive: Portrait tablets and up */
-@media screen and (min-width: 768px) {
-
+@media screen and (max-width: 800px) {
+  .menu-page{
+    // ------------------------HEADER---------------------------------------------
+    header.header-menu{
+          font-size: 10px;
+    }
+    main{
+      div.cell-food{
+        width: 33.33%;
+      }
+    }
+  }
+}
+@media screen and (max-width: 450px) {
+  body, html{
+    min-width: 250px;
+  }
+  .landing-page{
+    &::before{
+    }
+    .login-panel{
+      width: 90%;
+      height: auto;
+      padding-bottom: 15px;
+    }
+  }
+  .menu-page{
+    // ------------------------HEADER---------------------------------------------
+    header.header-menu{
+      div.cell-14{
+        div.inner{
+          span{
+          }
+          img{
+            display: none;
+          }
+        }
+      }
+    }
+    main{
+      div.cell-food{
+        width: 100%;
+      }
+    }
+  }
 }
 
 @keyframes login-panel-in {

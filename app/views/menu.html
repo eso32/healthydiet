@@ -2,7 +2,7 @@
 <header class="header-menu">
   <div class="cell-14">
     <div class="inner">
-      <img src="images/logo.png" alt="logo" />
+      <img src="images/logo.svg" alt="logo" />
     </div>
     <div class="inner">
       <span>Śniadanie</span>
@@ -14,7 +14,7 @@
       <span>Kolacja</span>
     </div>
   </div>
-  
+
   <div class="cell-14" ng-repeat="(day, menuCategory) in menu.orders">
     <div class="inner">
       <span>{{day}}</span>
@@ -40,15 +40,37 @@
     <div class="inner cell-button">
       <span>Zamawiam</span>
     </div>
-    <div class="inner cell-button" ng-click="menu.dayClick()">
-      <span>Filtry</span>
+    <div class="inner cell-button" ng-click="showSearch=true">
+      <span><i class="fa fa-search" aria-hidden="true"></i></span>
     </div>
   </div>
-
+  <div class="cell-full filters" id="filters" data-filters="showSearch">
+    <i class="fa fa-times" aria-hidden="true" ng-click="showSearch=false"></i>
+    <div class="search">
+      <i class="fa fa-search" aria-hidden="true"></i>
+      <input type="text" placeholder="Szukaj..." ng-model="searchText"/>
+    </div>
+    <div class="tags">
+      <h1>Proponowane na:</h1>
+      
+      <span>Śniadanie</span>
+      <span>Obiad</span>
+      <span>Kolacje</span>
+    </div>
+    <div class="diet">
+      <h1>Odpowiednie dla diety</h1>
+      
+      <span>Wysokobiałkowej</span>
+      <span>Niskokalorycznej</span>
+      <span>Bezglutenowa</span>
+    </div>
+    
+    
+  </div>
 </header>
 <main>
 
-  <my-food ng-repeat="item in menu.items" source="{{item.source}}" food-name="{{item.name}}" day-click="menu.clicked(dzien, jedzenie)" meal-click="menu.clickedMeal(pora)"></my-food>
+  <my-food ng-repeat="item in menu.items | filter:searchText" source="{{item.source}}" food-name="{{item.name}}" day-click="menu.clicked(dzien, jedzenie)" meal-click="menu.clickedMeal(pora)"></my-food>
 
 </main>
 <footer>

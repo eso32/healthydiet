@@ -6,38 +6,37 @@
  * @description
  * # food
  */
+
 angular.module('healthydiet2App')
-  .directive('myFood', function($log){
-    function linkFunction(scope, elem, attrs){
+  .directive('myFood', function(){
+    function linkFunction(scope, elem){
+      var elemChild = elem.children().children();
+      
       elem.on('mouseenter', function() {
-        elem.children().children()[0].className += ' animate';
+        elemChild[0].className += ' animate';
       });
 
       elem.on('mouseleave', function() {
-        elem.children().children()[0].classList.remove('animate');
-        elem.children().children()[1].classList.remove('animate');
-        elem.children().children()[2].classList.remove('animate');
-        elem.children().children()[0].classList.remove('animate-down');
-        elem.children().children()[1].classList.remove('animate-down');
-        elem.children().children()[2].classList.remove('animate-down');
+        for(var i=0; i<3; i++){
+          elemChild[i].classList.remove('animate');  
+          elemChild[i].classList.remove('animate-down');
+        }
       });
 
       elem.on('click', function() {
-        elem.children().children()[0].className += ' animate-down';
-        elem.children().children()[1].className += ' animate';
-        // $log.log($('.cell-food'));
+        elemChild[0].className += ' animate-down';
+        elemChild[1].className += ' animate';
       });
 
       angular.element(elem.children().children()[1]).on('click', function(){
-        elem.children().children()[1].className += ' animate-down';
-        elem.children().children()[2].className += ' animate';
-      })
+        elemChild[1].className += ' animate-down';
+        elemChild[2].className += ' animate';
+      });
 
       angular.element(elem.children().children()[2]).on('click', function(){
-        elem.children().children()[2].className += ' animate-down';
-      })
-
-    };
+        elemChild[2].className += ' animate-down';
+      });
+    }
 
     return {
       scope: {
@@ -46,8 +45,7 @@ angular.module('healthydiet2App')
         dayClick: '&',
         mealClick: '&'
       },
-      templateUrl: 'scripts/directives/food.html',
+      templateUrl: 'views/food.html',
       link: linkFunction
-    }
-  })
-  ;
+    };
+  });
